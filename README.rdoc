@@ -1,0 +1,70 @@
+= Trackstamps
+
+Track which user created or updated record in rails. This gem depends on devise gem and uses devise 'current_user' helper method.
+
+== Dependency
+
+This gem depends on devise gem and uses devise 'current_user' helper method.
+
+== Installation
+
+Simply add trackstamps gem to your Gemfile.
+
+    gem 'trackstamps'
+
+Install bundler gems
+
+    bundle install
+
+Install trackstamps
+
+    rails generate trackstamps:install
+
+Generate migration on required model's table
+
+    rails generate trackstamps:migration table_name
+
+i.e. if you need to track changes on Account model, you need to do this
+
+    rails generate trackstamps:migration accounts
+
+It will automatically include trackstamps module inside your model class
+
+    class Account < ActiveRecord::Base
+        include Trackstamps
+
+        .....
+
+    end
+
+Execute migrations
+
+    rake db:migrate
+
+And now you are ready to track changes
+
+
+== Usage
+
+It will automatically track record is created or updated by which user. i.e.
+
+    Account.last.creator
+
+will return last account was created by which user. Similarily
+
+    Account.find(8).updater
+
+will tells us which user updated account with id 8
+
+== TODO
+
+* Autodiscover devise model class
+* Mongoid ORM support
+
+== Contributing
+
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Added some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create new Pull Request
