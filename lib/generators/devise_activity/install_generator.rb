@@ -1,26 +1,14 @@
-=begin
 module DeviseActivity
   module Generators
     class InstallGenerator < Rails::Generators::Base
-      desc "Add devise activity functionality to Rails based web applications"
       source_root File.expand_path("../templates", __FILE__)
+      desc "Creates DeviseActivity initializer for your application"
 
+      def copy_initializer
+        template "devise_activity_initializer.rb", "config/initializers/devise_activity.rb"
 
-      def inject_before_filter_for_current_user
-        path = File.join("app", "controllers", "application_controller.rb")
-        inject_into_file(path, :after => "class ApplicationController < ActionController::Base\n") do
-          <<-RUBY
-            before_filter :set_trackstamps_user
-            def set_trackstamps_user
-              Thread.current[:current_user] = current_user
-            ensure
-              # to address the thread variable leak issues in Puma/Thin webserver
-              Thread.current[:current_user] = nil
-            end
-          RUBY
-        end
+        puts "Install complete! Truly Outrageous!"
       end
     end
   end
 end
-=end

@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.description = "Store devise user session and page visiting history with duration and date/time in rails"
   s.license     = "MIT"
 
-  s.files = Dir["{lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.files = Dir["{app,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails", '>= 3'

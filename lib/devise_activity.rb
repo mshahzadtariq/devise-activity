@@ -1,25 +1,32 @@
+require 'devise_activity/configuration'
+require 'active_record'
+
+
 module DeviseActivity
+  require 'devise_activity/session'
+  require 'devise_activity/navigation'
+
   extend ActiveSupport::Concern
 
   included do
 
-    before_save :set_updater
-    before_create :set_creator
-
-    belongs_to :updater, class_name: "User", foreign_key: "updated_by"
-    belongs_to :creator, class_name: "User", foreign_key: "created_by"
+    before_action :track_user_activity
 
     protected
 
-    def set_updater
-      return unless Trackstamps.current_user
-      self.send("#{:updated_by}=", Trackstamps.current_user.id)
+    def track_user_activity
+      DeviseActivity::Session.create
+      DeviseActivity::Navigation.create
     end
 
-    def set_creator
-      return unless Trackstamps.current_user
-      self.send("#{:created_by}=", Trackstamps.current_user.id)
-    end
+  end
 
+  class << self
+    attr_accessor :configuration
+  end
+
+  def self.configure
+    self.configuration ||= Configuration.new
+    yield(configuration)
   end
 end
