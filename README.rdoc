@@ -1,16 +1,12 @@
-= Trackstamps
+= DeviseActivity
 
-Track which user created or updated record in rails. This gem depends on devise gem and uses devise 'current_user' helper method.
-
-== Dependency
-
-This gem depends on devise gem and uses devise 'current_user' helper method.
+Keep history of user page views and time spent on differnt pages in rails. This gem depends on devise gem and uses devise 'current_user' helper method which can be configured.
 
 == Installation
 
 Simply add trackstamps gem to your Gemfile.
 
-    gem 'trackstamps'
+    gem 'devise-activity'
 
 Install bundler gems
 
@@ -18,20 +14,17 @@ Install bundler gems
 
 Install trackstamps
 
-    rails generate trackstamps:install
+    rails generate devise_activity:install
 
+You can change sessions and navigations table names from generated configuration file (config/initializers/devise_activity.rb) before generating migration.
 Generate migration on required model's table
 
-    rails generate trackstamps:migration table_name
+    rails generate devise_activity:migration
 
-i.e. if you need to track changes on Account model, you need to do this
+Include DeviseActivity module to application controller or admin etc for which you want to track user activities
 
-    rails generate trackstamps:migration accounts
-
-It will automatically include trackstamps module inside your model class
-
-    class Account < ActiveRecord::Base
-        include Trackstamps
+    class ApplicationController
+        include DeviseActivity
 
         .....
 
@@ -46,19 +39,22 @@ And now you are ready to track changes
 
 == Usage
 
-It will automatically track record is created or updated by which user. i.e.
+It will automatically keep of sign in's, sign out's and page views history in sessions and navigations table i.e.
 
-    Account.last.creator
+    Session.all
 
 will return last account was created by which user. Similarily
 
-    Account.find(8).updater
+    Session.last.navigations
+
+    Session.where(user_id: 12).all
+
+    Session.where(user_id: 12).last.navigations
 
 will tells us which user updated account with id 8
 
 == TODO
 
-* Autodiscover devise model class
 * Mongoid ORM support
 
 == Contributing
