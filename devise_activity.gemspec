@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = DeviseActivity::VERSION
   s.authors     = ["M Shahzad Tariq"]
   s.email       = ["m.shahzad.tariq@hotmail.com"]
-  s.homepage    = "http://github.com/mshahzadtariq/devise_activity"
+  s.homepage    = "http://github.com/mshahzadtariq/devise-activity"
   s.summary     = "Store devise user session and page visiting history with duration and date/time in rails"
   s.description = "Store devise user session and page visiting history with duration and date/time in rails"
   s.license     = "MIT"

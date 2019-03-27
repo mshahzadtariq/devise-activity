@@ -2,19 +2,36 @@ module DeviseActivity
   class Configuration
     attr_accessor :sessions_table_name,
                   :navigations_table_name,
-                  :devise_model_name,
-                  :sign_in_controller_name,
-                  :sign_in_action_name,
-                  :sign_out_controller_name,
-                  :sign_out_action_name
+                  :devise_model_name
 
     def initialize
       @sessions_table_name = 'sessions'
       @navigations_table_name = 'navigations'
-      @sign_in_controller_name = 'sessions'
-      @sign_in_action_name = 'create'
-      @sign_out_controller_name = 'sessions'
-      @sign_out_action_name = 'destroy'
+      @devise_model_name = 'user'
+      add_warden_hooks
+    end
+
+    def add_warden_hooks
+      Devise.setup do |c|
+
+        Warden::Manager.after_authentication do |record, auth, opts|
+          if record and record.class == DeviseActivity.configuration.devise_model_name.classify.constantize
+            begin
+              Session.close_all_previous_sessions(record)
+              Session.start_new_session(record)
+            rescue
+              puts "Something went wrong"
+            end
+          end
+        end
+
+        Warden::Manager.before_logout do |record, _warden, _options|
+          if record and record.class == DeviseActivity.configuration.devise_model_name.classify.constantize
+            Session.close_all_previous_sessions(record) rescue nil
+          end
+        end
+
+      end
     end
   end
 end

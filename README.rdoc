@@ -41,15 +41,21 @@ And now you are ready to track changes
 
 It will automatically keep of sign in's, sign out's and page views history in sessions and navigations table i.e.
 
-    Session.all
+    DeviseActivity::Session.all
 
 will return last account was created by which user. Similarily
 
-    Session.last.navigations
+    DeviseActivity::Session.last.navigations
 
-    Session.where(user_id: 12).all
+    DeviseActivity::Session.where(user_id: 12).all
 
-    Session.where(user_id: 12).last.navigations
+    DeviseActivity::Session.where(user_id: 12).last.navigations
+
+    DeviseActivity::Navigation.count
+
+    DeviseActivity::Navigation.last.action
+
+    DeviseActivity::Navigation.last.controller
 
 will tells us which user updated account with id 8
 
