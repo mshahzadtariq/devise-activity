@@ -57,7 +57,28 @@ will return last account was created by which user. Similarily
 
     DeviseActivity::Navigation.last.controller
 
-will tells us which user updated account with id 8
+DeviseActivity also provide few handy model methods for Statistics
+
+    DeviseActivity::Stats.most_visits_by
+
+    DeviseActivity::Stats.least_visits_by
+
+    DeviseActivity::Stats.most_popular_controller
+
+    DeviseActivity::Stats.least_popular_controller
+
+    DeviseActivity::Stats.most_popular_action
+
+    DeviseActivity::Stats.least_popular_action
+
+    DeviseActivity::Stats.most_visited_page
+
+    DeviseActivity::Stats.least_visited_page
+
+    DeviseActivity::Stats.most_sign_ins_by
+
+    DeviseActivity::Stats.total_sign_ins(user)
+    
 
 == TODO
 
