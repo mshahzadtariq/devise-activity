@@ -1,6 +1,6 @@
 = DeviseActivity
 
-Keep history of user page views and time spent on differnt pages in rails. This gem depends on devise gem and uses devise 'current_user' helper method which can be configured.
+Keep history of user page views and time spent on different pages in rails. This gem depends on devise gem and uses devise 'current_user' helper method which can be configured.
 
 == Installation
 
