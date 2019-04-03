@@ -6,6 +6,7 @@ module DeviseActivity
 
     has_many :navigations, class_name: 'DeviseActivity::Navigation'
 
+    belongs_to DeviseActivity.configuration.devise_model_name.to_sym
 
     class << self
       def current user

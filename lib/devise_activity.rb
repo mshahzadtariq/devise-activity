@@ -42,6 +42,8 @@ module DeviseActivity
       require "devise_activity/extenders/navigation"
       require "devise_activity/session"
       require "devise_activity/navigation"
+      require "devise_activity/stats"
+      require "devise_activity/devise_model"
       ActiveRecord::Base.extend DeviseActivity::Extenders::Session
       ActiveRecord::Base.extend DeviseActivity::Extenders::Navigation
     end

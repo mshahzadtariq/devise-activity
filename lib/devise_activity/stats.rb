@@ -1,5 +1,6 @@
 module DeviseActivity
   class Stats
+
     class << self
 
       def most_visits_by
@@ -34,8 +35,13 @@ module DeviseActivity
         DeviseActivity::Navigation.group("page_url").count.min_by{|k, v| v}.first
       end
 
+      def page_view_count page_url
+        DeviseActivity::Navigation.where(page_url: page_url).count
+      end
+
       def most_sign_ins_by
-        DeviseActivity.configuration.devise_model_name.classify.constantize.find((DeviseActivity::Session.group("#{DeviseActivity.configuration.devise_model_name}_id").count.max_by{|k, v| v }.first) rescue nil
+        id = DeviseActivity::Session.group("#{DeviseActivity.configuration.devise_model_name}_id").count.max_by{|k, v| v }.first
+        DeviseActivity.configuration.devise_model_name.classify.constantize.find(id) rescue nil
       end
 
       def total_sign_ins obj

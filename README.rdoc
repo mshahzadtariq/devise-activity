@@ -78,7 +78,7 @@ DeviseActivity also provide few handy model methods for Statistics
     DeviseActivity::Stats.most_sign_ins_by
 
     DeviseActivity::Stats.total_sign_ins(user)
-    
+
 
 == TODO
 
