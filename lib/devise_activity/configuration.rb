@@ -2,12 +2,14 @@ module DeviseActivity
   class Configuration
     attr_accessor :sessions_table_name,
                   :navigations_table_name,
-                  :devise_model_name
+                  :devise_model_name,
+                  :request_formats
 
     def initialize
       @sessions_table_name = 'sessions'
       @navigations_table_name = 'navigations'
       @devise_model_name = 'user'
+      @request_formats = [:html, :pdf, :json, :xml]
       add_warden_hooks
     end
 

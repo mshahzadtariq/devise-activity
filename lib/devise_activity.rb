@@ -12,6 +12,7 @@ module DeviseActivity
     protected
 
     def track_navigation_activity
+      return unless DeviseActivity.configuration.request_formats.include?(request.format.symbol)
       current_session = find_or_create_current_session
       Navigation.create session_id: current_session.id,
                         page_url: request.original_url,
